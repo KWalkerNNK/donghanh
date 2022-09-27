@@ -16,7 +16,7 @@ import { ProfileModule } from './profile/profile.module';
       username: 'root',
       password: '1029384756',
       database: 'donghanh',
-      entities: entities,
+      entities,
       synchronize: true,
     }),
   ],

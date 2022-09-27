@@ -1,5 +1,5 @@
 import { User } from './../database/entity/entity.user';
-import { userDto } from '../dto/dto.user';
+import { userDto } from './dto/dto.user';
 import * as bcrypt from 'bcrypt';
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -42,7 +42,6 @@ export class AuthService {
     if (account) {
       const isMatch = await bcrypt.compare(user.password, account.password);
       if (isMatch) {
-        delete user.password;
         return this.signToken(account.id, account.email);
         // return `Hey ${account.fullName}! Bạn đã đăng nhập thành công rồi nha!`;
       }

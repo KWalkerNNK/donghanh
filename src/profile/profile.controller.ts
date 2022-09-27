@@ -1,12 +1,13 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
+import { User } from './../database/entity/entity.user';
+import { JwtGuard } from './../auth/guard/guard.jwt';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { GetUser } from '../auth/decorators/decorator.index';
 
+@UseGuards(JwtGuard)
 @Controller('profile')
 export class ProfileController {
-  @UseGuards(AuthGuard('jwt'))
   @Get('/')
-  getMe(@Req() req: Request) {
-    return req.user;
+  getMe(@GetUser() user: User) {
+    return user;
   }
 }

@@ -1,4 +1,3 @@
-import { IsEmail, IsNumber } from 'class-validator';
 import {
   Column,
   Entity,
@@ -11,7 +10,6 @@ import {
 export class User {
   @Column({ name: 'id', type: 'bigint' })
   @PrimaryGeneratedColumn()
-  @IsNumber()
   id: number;
 
   @Column({ name: 'full_name', nullable: false })
@@ -20,7 +18,6 @@ export class User {
   @Column({ name: 'phone_number', nullable: false })
   phoneNumber: string;
 
-  @IsEmail()
   @Column({ name: 'email', unique: true, nullable: false })
   email: string;
 

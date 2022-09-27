@@ -1,4 +1,3 @@
-import { IsNumber } from 'class-validator';
 import {
   Column,
   Entity,
@@ -11,7 +10,6 @@ import {
 export class Product {
   @Column({ name: 'id', type: 'bigint' })
   @PrimaryGeneratedColumn()
-  @IsNumber()
   id: number;
 
   @Column({ name: 'name', nullable: false })
