@@ -14,7 +14,7 @@ export class AuthService {
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
     private readonly jwt: JwtService,
-  ) { }
+  ) {}
 
   async register(user: UserDto) {
     try {
@@ -28,10 +28,7 @@ export class AuthService {
 
       return this.signToken(user.id, user.email);
     } catch (err) {
-      throw new HttpException(
-        MESSAGE.SIGNUP_FAILED,
-        401,
-      );
+      throw new HttpException(MESSAGE.SIGNUP_FAILED, 401);
     }
   }
 
