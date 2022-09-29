@@ -1,3 +1,4 @@
+import { MESSAGE } from './../utils/util.message';
 import { AuthDto, UserDto } from './dto/dto.index';
 import { User } from './../database/entity/entity.user';
 import * as bcrypt from 'bcrypt';
@@ -13,7 +14,7 @@ export class AuthService {
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
     private readonly jwt: JwtService,
-  ) {}
+  ) { }
 
   async register(user: UserDto) {
     try {
@@ -26,10 +27,9 @@ export class AuthService {
       await this.userRepo.save(user);
 
       return this.signToken(user.id, user.email);
-      // return `Chào mừng ${user.fullName} đã đăng kí toàn khoản thành công!`;
     } catch (err) {
       throw new HttpException(
-        'Email này đã có người đăng kí sử dụng rồi! Vui lòng sử dụng Email khác!',
+        MESSAGE.SIGNUP_FAILED,
         401,
       );
     }
@@ -43,11 +43,10 @@ export class AuthService {
       const isMatch = await bcrypt.compare(user.password, account.password);
       if (isMatch) {
         return this.signToken(account.id, account.email);
-        // return `Hey ${account.fullName}! Bạn đã đăng nhập thành công rồi nha!`;
       }
-      throw new HttpException('Sai mật khẩu rồi bạn!', 407);
+      throw new HttpException(MESSAGE.WRONG_PASSWORD, 407);
     }
-    throw new HttpException('Sai email rồi bạn!', 400);
+    throw new HttpException(MESSAGE.WRONG_EMAIL, 400);
   }
 
   //Create JWT tokens
