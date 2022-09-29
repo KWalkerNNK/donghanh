@@ -1,5 +1,5 @@
+import { AuthDto, UserDto } from './dto/dto.index';
 import { User } from './../database/entity/entity.user';
-import { userDto } from './dto/dto.user';
 import * as bcrypt from 'bcrypt';
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,7 +15,7 @@ export class AuthService {
     private readonly jwt: JwtService,
   ) {}
 
-  async register(user: userDto) {
+  async register(user: UserDto) {
     try {
       //Password hash
       const password = await user.password;
@@ -35,7 +35,7 @@ export class AuthService {
     }
   }
 
-  async login(user: userDto) {
+  async login(user: AuthDto) {
     const account = await this.userRepo.findOne({
       where: { email: user.email },
     });
