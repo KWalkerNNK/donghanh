@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,6 +9,7 @@ import { ProfileModule } from './profile/profile.module';
   imports: [
     AuthModule,
     ProfileModule,
+    AdminModule,
     //Connect to SQL
     TypeOrmModule.forRoot({
       type: 'mysql',

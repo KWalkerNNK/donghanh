@@ -20,8 +20,10 @@ describe('Test E2E', () => {
 
     await app.init();
   });
+  it.todo('Init');
 
-  afterAll(() => {
-    app.close();
+  afterAll(async () => {
+    await app.close();
   });
+  it.todo('Close');
 });
