@@ -1,3 +1,4 @@
+import { Role } from '../enums/enum.role';
 import { MESSAGE } from './../utils/util.message';
 import { AuthDto, UserDto } from './dto/dto.index';
 import { User } from './../database/entity/entity.user';
@@ -39,7 +40,7 @@ export class AuthService {
     if (account) {
       const isMatch = await bcrypt.compare(user.password, account.password);
       if (isMatch) {
-        return this.signToken(account.id, account.email);
+        return this.signToken(account.id, account.email, account.isRole);
       }
       throw new HttpException(MESSAGE.WRONG_PASSWORD, 407);
     }
@@ -50,10 +51,12 @@ export class AuthService {
   async signToken(
     userId: number,
     email: string,
+    role?: string,
   ): Promise<{ access_token: string }> {
     const payload = {
       id: userId,
       email,
+      role,
     };
     const token = await this.jwt.signAsync(payload, {
       expiresIn: '15m',

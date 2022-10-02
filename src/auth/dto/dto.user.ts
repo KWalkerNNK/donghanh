@@ -22,7 +22,4 @@ export class UserDto {
   @IsNotEmpty()
   @IsString()
   password: string;
-
-  @IsString()
-  isRole: string;
 }

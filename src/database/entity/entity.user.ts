@@ -27,7 +27,7 @@ export class User {
   @Column({ name: 'password', nullable: false, type: 'text' })
   password: string;
 
-  @Column({ name: 'is_role', nullable: false, default: 'User' })
+  @Column({ name: 'is_role', nullable: false, default: 'user' })
   isRole: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

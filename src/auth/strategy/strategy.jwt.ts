@@ -19,11 +19,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: { id: number; email: string }) {
+  //Dùng để hiển thị thông tin tài khoản hiện tại
+  async validate(payload: { id: number; email: string; role?: string }) {
     const account = await this.userRepo.findOne({
       where: { email: payload.email },
     });
-    delete account.password;
+    delete account.password && delete account.isRole;
     return account;
   }
 }
