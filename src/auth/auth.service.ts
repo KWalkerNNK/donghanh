@@ -1,4 +1,3 @@
-import { Role } from '../enums/enum.role';
 import { MESSAGE } from './../utils/util.message';
 import { AuthDto, UserDto } from './dto/dto.index';
 import { User } from './../database/entity/entity.user';
@@ -27,7 +26,7 @@ export class AuthService {
       //Save to database
       await this.userRepo.save(user);
 
-      return this.signToken(user.id, user.email);
+      return this.signToken(user.id, user.email, user.isRole);
     } catch (err) {
       throw new HttpException(MESSAGE.SIGNUP_FAILED, 401);
     }

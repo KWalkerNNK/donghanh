@@ -1,7 +1,7 @@
 import { MESSAGE } from '../utils/util.message';
 import { User } from '../database/entity/entity.user';
 import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { EditUserDto } from './dto/dto.edit-user';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -13,7 +13,13 @@ export class UserService {
   ) {}
 
   async editUser(userId: number, editUserDto: EditUserDto): Promise<{}> {
-    await this.userRepo.update(userId, editUserDto);
-    return { message: MESSAGE.EDIT_PROFILE, ...editUserDto };
+    try {
+      await this.userRepo.update(userId, editUserDto);
+      return { message: MESSAGE.EDIT_PROFILE, ...editUserDto };
+    } catch (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        throw new HttpException(MESSAGE.EDITING_ERROR, 500);
+      }
+    }
   }
 }

@@ -5,6 +5,9 @@ export const MESSAGE = {
   WRONG_EMAIL: 'Sai email rồi bạn!',
 
   EDIT_PROFILE: 'Thông tin của bạn đã được sửa đổi',
+  EDITING_ERROR: 'Đã trùng với một email khác, vui lòng cập nhật email khác!',
+
+  NO_PROFILE_EXISTS: 'Không tồn tại bất kì tài khoản nào',
 
   FORBIDDEN_RESOURCE: 'Bạn không có quyền truy cập tài nguyên này!',
 };

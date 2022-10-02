@@ -1,10 +1,11 @@
 import { User } from './../../database/entity/entity.user';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { SECRET_KEY } from '../../constant/const.secret';
 import { Repository } from 'typeorm';
+import { MESSAGE } from 'src/utils/util.message';
 
 Injectable();
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -24,6 +25,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     const account = await this.userRepo.findOne({
       where: { email: payload.email },
     });
+
+    if (!account) throw new HttpException(MESSAGE.NO_PROFILE_EXISTS, 404);
+
     delete account.password && delete account.isRole;
     return account;
   }

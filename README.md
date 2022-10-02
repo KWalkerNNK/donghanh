@@ -45,6 +45,47 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Routes are created
+
+```bash
+# http://localhost:1410/auth/register
+Method: POST
+@Body
+-> fullName: Your name
+-> phoneNumber: 1234567890
+-> email: example@gmail.com
+-> address: Your address
+-> password: Your password
+
+# http://localhost:1410/auth/login
+Method: POST
+@Body
+-> email: example@gmail.com
+-> password: Your password
+
+# http://localhost:1410/profile
+Method: GET
+@Headers
+-> Authorization: Bearer access_token
+
+# http://localhost:1410/profile/edit
+Method: PATCH
+@Body
+-> fullName?: Your name
+-> phoneNumber?: 1234567890
+-> email?: example@gmail.com
+-> address?: Your address
+-> password?: Your password
+
+@Headers
+-> Authorization: Bearer access_token
+
+# http://localhost:1410/admin/dashboard
+Method: GET
+@Headers
+-> Authorization: Bearer access_token
+```
+
 ## Test
 
 ```bash
