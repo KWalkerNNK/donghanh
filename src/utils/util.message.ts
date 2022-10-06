@@ -10,4 +10,6 @@ export const MESSAGE = {
   NO_PROFILE_EXISTS: 'Không tồn tại bất kì tài khoản nào',
 
   FORBIDDEN_RESOURCE: 'Bạn không có quyền truy cập tài nguyên này!',
+
+  PRODUCT_REMOVED: 'Bạn đã xoá sản phẩm thành công!',
 };

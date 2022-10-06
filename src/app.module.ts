@@ -4,11 +4,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './database/dtb.index';
 import { UserModule } from './user/user.module';
+import { ProductModule } from './products/product.module';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
+    ProductModule,
     AdminModule,
 
     //Connect to SQL
