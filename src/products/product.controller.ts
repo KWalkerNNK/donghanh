@@ -9,10 +9,15 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UploadedFiles,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Roles } from 'src/auth/decorators/decorator.index';
 import { Role } from 'src/enums/enum.role';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('product')
 export class ProductController {
@@ -28,9 +33,34 @@ export class ProductController {
     return await this.productService.getProductById(productId);
   }
 
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
   @Post()
-  async createProduct(@Body() dto: CreateProductDto) {
+  @UseInterceptors(
+    FilesInterceptor('files', 10, {
+      storage: diskStorage({
+        destination: './upload',
+        async filename(req, file, callback) {
+          const uniqueSuffix: string = await `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}`;
+          const name: string = file.originalname.split('.')[0];
+          const ext: string = extname(file.originalname);
+          const fileName: string = `${name}-${uniqueSuffix}${ext}`;
+          callback(null, fileName);
+        },
+      }),
+    }),
+  )
+  async createProduct(
+    @Body() dto: CreateProductDto,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ) {
+    console.log(files);
+    let sub: string = '';
+    for (let i = 0; i < files.length; i++) {
+      sub += files[i].filename + ', ';
+    }
+    dto.productImage = '{' + sub + '}';
     return await this.productService.createProduct(dto);
   }
 
