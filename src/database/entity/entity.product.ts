@@ -15,8 +15,8 @@ export class Product {
   @Column({ name: 'name', nullable: false })
   productName: string;
 
-  @Column({ name: 'image', nullable: false })
-  productImage: string;
+  @Column({ name: 'files', nullable: false })
+  productFiles: string;
 
   @Column({ name: 'description', nullable: false })
   productDescription: string;

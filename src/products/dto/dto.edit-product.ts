@@ -8,7 +8,7 @@ export class EditProductDto {
 
   @IsString()
   @IsOptional()
-  productImage?: string;
+  productFiles?: string;
 
   @IsString()
   @IsOptional()

@@ -7,8 +7,8 @@ export class CreateProductDto {
   productName: string;
 
   @IsString()
-  @IsNotEmpty()
-  productImage: string;
+  @IsOptional()
+  productFiles?: string;
 
   @IsString()
   @IsOptional()

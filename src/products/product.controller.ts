@@ -5,19 +5,23 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
   Param,
   ParseIntPipe,
   Patch,
   Post,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { Roles } from 'src/auth/decorators/decorator.index';
-import { Role } from 'src/enums/enum.role';
+import { Roles } from './../auth/decorators/decorator.index';
+import { Role } from './../enums/enum.role';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { MESSAGE } from './../utils/util.message';
+import { JwtGuard } from './../auth/guard/guard.jwt';
 
 @Controller('product')
 export class ProductController {
@@ -33,10 +37,11 @@ export class ProductController {
     return await this.productService.getProductById(productId);
   }
 
-  // @Roles(Role.Admin)
+  @UseGuards(JwtGuard)
+  @Roles(Role.Admin)
   @Post()
   @UseInterceptors(
-    FilesInterceptor('files', 10, {
+    FilesInterceptor('productFiles', 10, {
       storage: diskStorage({
         destination: './upload',
         async filename(req, file, callback) {
@@ -55,12 +60,14 @@ export class ProductController {
     @Body() dto: CreateProductDto,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
-    console.log(files);
-    let sub: string = '';
+    let productFileNames: string = '';
     for (let i = 0; i < files.length; i++) {
-      sub += files[i].filename + ', ';
+      productFileNames += files[i].filename + ', ';
     }
-    dto.productImage = '{' + sub + '}';
+    dto.productFiles = await `{ ${productFileNames}}`;
+    if (productFileNames === '') {
+      throw new HttpException(MESSAGE.UPLOAD_ERROR_FILE, 400);
+    }
     return await this.productService.createProduct(dto);
   }
 
