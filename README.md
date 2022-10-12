@@ -5,7 +5,7 @@
 ## For everyone
 
 ```bash
-# http://localhost:1410/auth/register
+💦 http://localhost:1410/auth/register
 Method: POST
 @Body
 -> fullName: Your name
@@ -14,18 +14,18 @@ Method: POST
 -> address: Your address
 -> password: Your password
 
-# http://localhost:1410/auth/login
+💦 http://localhost:1410/auth/login
 Method: POST
 @Body
 -> email: example@gmail.com
 -> password: Your password
 
-# http://localhost:1410/profile
+💦 http://localhost:1410/profile
 Method: GET
 @Headers
 -> Authorization: Bearer access_token
 
-# http://localhost:1410/profile/edit
+💦 http://localhost:1410/profile/edit
 Method: PATCH
 @Body
 -> fullName?: Your name
@@ -42,18 +42,18 @@ Method: PATCH
 ## For users
 
 ```bash
-# http://localhost:1410/product
+💦 http://localhost:1410/product
 Method: GET
 (Get all information of all products)
 
-# http://localhost:1410/product/:id
+💦 http://localhost:1410/product/:id
 Method: GET
 (Get product information of any product)
 ```
 ## For the owner
 
 ```bash
-# http://localhost:1410/product
+💦 http://localhost:1410/product
 Method: POST
 (Add any product)
 @Body
@@ -67,7 +67,7 @@ Method: POST
 @Headers
 -> Authorization: Bearer access_token
 
-# http://localhost:1410/product/:id
+💦 http://localhost:1410/product/:id
 Method: PATCH
 (Edit any product)
 @Body
@@ -81,7 +81,7 @@ Method: PATCH
 @Headers
 -> Authorization: Bearer access_token
 
-# http://localhost:1410/product/:id
+💦 http://localhost:1410/product/:id
 Method: DELETE
 (Delete any product)
 
