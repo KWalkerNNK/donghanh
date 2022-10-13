@@ -24,6 +24,9 @@ export class Product {
   @Column({ name: 'price', nullable: false })
   productPrice: number;
 
+  @Column({ name: 'quantity', nullable: false })
+  productQuantity: number;
+
   @Column({ name: 'discount', nullable: false })
   productDiscount: number;
 

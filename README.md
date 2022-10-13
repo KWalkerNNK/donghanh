@@ -47,6 +47,21 @@ Method: GET - Get all information of all products
 
 💦 http://localhost:1410/product/:id
 Method: GET - Get product information of any product
+
+💦 http://localhost:1410/cart
+Method: GET - Check out your own shopping cart
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦 http://localhost:1410/cart
+Method: POST - Add your order
+-> productId: ...
+-> productQuantity: ...
+
+@Headers
+-> Authorization: Bearer access_token
+
 ```
 ## For the owner
 

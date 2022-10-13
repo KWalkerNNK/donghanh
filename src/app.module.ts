@@ -1,3 +1,4 @@
+import { CartModule } from './cart/cart.module';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
@@ -11,6 +12,7 @@ import { ProductModule } from './products/product.module';
     AuthModule,
     UserModule,
     ProductModule,
+    CartModule,
     AdminModule,
 
     //Connect to SQL

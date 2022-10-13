@@ -20,6 +20,11 @@ export class CreateProductDto {
   productPrice: number;
 
   @IsInt()
+  @IsNotEmpty()
+  @Type(() => Number)
+  productQuantity: number;
+
+  @IsInt()
   @IsOptional()
   @Type(() => Number)
   productDiscount?: number;

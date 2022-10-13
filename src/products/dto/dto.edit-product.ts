@@ -22,6 +22,11 @@ export class EditProductDto {
   @IsInt()
   @IsOptional()
   @Type(() => Number)
+  productQuantity?: number;
+
+  @IsInt()
+  @IsOptional()
+  @Type(() => Number)
   productDiscount?: number;
 
   @IsString()

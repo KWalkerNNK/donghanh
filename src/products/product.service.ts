@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/dto.create-product';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EditProductDto } from './dto/dto.edit-product';
-import { MESSAGE } from 'src/utils/util.message';
+import { MESSAGE } from '.././utils/util.message';
 
 @Injectable()
 export class ProductService {
