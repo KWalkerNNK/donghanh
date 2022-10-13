@@ -71,6 +71,7 @@ export class ProductController {
     return await this.productService.createProduct(dto);
   }
 
+  @UseGuards(JwtGuard)
   @Roles(Role.Admin)
   @Patch(':id')
   async editProductById(
@@ -80,9 +81,17 @@ export class ProductController {
     return await this.productService.editProductById(productId, dto);
   }
 
+  @UseGuards(JwtGuard)
   @Roles(Role.Admin)
   @Delete(':id')
   async deleteProductById(@Param('id', ParseIntPipe) productId: number) {
     return await this.productService.deleteProductById(productId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Roles(Role.Admin)
+  @Delete()
+  async deleteProducts() {
+    return await this.productService.deleteProducts();
   }
 }

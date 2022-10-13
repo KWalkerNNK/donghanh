@@ -34,4 +34,9 @@ export class ProductService {
     await this.productRepo.delete(id);
     return { message: MESSAGE.PRODUCT_REMOVED };
   }
+
+  async deleteProducts() {
+    await this.productRepo.clear();
+    return { message: MESSAGE.PRODUCTS_REMOVED };
+  }
 }

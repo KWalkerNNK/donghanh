@@ -43,19 +43,16 @@ Method: PATCH
 
 ```bash
 💦 http://localhost:1410/product
-Method: GET
-(Get all information of all products)
+Method: GET - Get all information of all products
 
 💦 http://localhost:1410/product/:id
-Method: GET
-(Get product information of any product)
+Method: GET - Get product information of any product
 ```
 ## For the owner
 
 ```bash
 💦 http://localhost:1410/product
-Method: POST
-(Add any product)
+Method: POST - Add any product
 @Body
 -> productName: ...
 -> productFiles: Any Photo or Video
@@ -68,8 +65,7 @@ Method: POST
 -> Authorization: Bearer access_token
 
 💦 http://localhost:1410/product/:id
-Method: PATCH
-(Edit any product)
+Method: PATCH - Edit any product
 @Body
 -> productName?: ...
 -> productFiles?: Any Photo or Video
@@ -82,8 +78,13 @@ Method: PATCH
 -> Authorization: Bearer access_token
 
 💦 http://localhost:1410/product/:id
-Method: DELETE
-(Delete any product)
+Method: DELETE - Delete any product
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦 http://localhost:1410/product
+Method: DELETE - Delete all products
 
 @Headers
 -> Authorization: Bearer access_token

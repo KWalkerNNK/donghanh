@@ -12,6 +12,7 @@ export const MESSAGE = {
   FORBIDDEN_RESOURCE: 'Bạn không có quyền truy cập tài nguyên này!',
 
   PRODUCT_REMOVED: 'Bạn đã xoá sản phẩm thành công!',
+  PRODUCTS_REMOVED: 'Bạn đã xoá tất cả sản phẩm thành công!',
 
   UPLOAD_ERROR_FILE: 'Tệp không được trống!',
 };
