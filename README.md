@@ -62,6 +62,18 @@ Method: POST - Add your order
 @Headers
 -> Authorization: Bearer access_token
 
+💦 http://localhost:1410/cart/:id
+Method: DELETE - Delete your order
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦 http://localhost:1410/cart
+Method: DELETE - Delete your cart
+
+@Headers
+-> Authorization: Bearer access_token
+
 ```
 ## For the owner
 

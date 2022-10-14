@@ -29,10 +29,4 @@ export class Cart {
 
   @DeleteDateColumn({ name: 'deleted_at', nullable: true })
   DeletedAt?: Date;
-
-  // @OneToOne(type => User) @JoinColumn({ name: 'user_id'})
-  // userId: User;
-
-  // @OneToOne(type => Product) @JoinColumn({ name: 'product_id'})
-  // productId: Product;
 }
