@@ -62,6 +62,14 @@ Method: POST - Add your order
 @Headers
 -> Authorization: Bearer access_token
 
+💦 http://localhost:1410/cart
+Method: PATCH - Update your order
+-> productId: ...
+-> productQuantity: ...
+
+@Headers
+-> Authorization: Bearer access_token
+
 💦 http://localhost:1410/cart/:id
 Method: DELETE - Delete your order
 

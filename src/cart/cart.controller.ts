@@ -1,3 +1,4 @@
+import { UpdateOrderDto } from './dto/dto.update-order';
 import { JwtGuard } from '../auth/guard/guard.jwt';
 import { CartService } from './cart.service';
 import {
@@ -6,6 +7,8 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -18,8 +21,8 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Get()
-  async getCart(@GetUser('id') userId: number, @Body() dto: CartDto) {
-    return await this.cartService.getCart(userId, dto);
+  async getCart(@GetUser('id') userId: number) {
+    return await this.cartService.getCart(userId);
   }
 
   @Post()
@@ -28,6 +31,14 @@ export class CartController {
     @Body() dto: CartDto,
   ): Promise<{}> {
     return await this.cartService.addOrder(userId, dto);
+  }
+
+  @Patch(':id')
+  async updateOrder(
+    @Param('id', ParseIntPipe) productId: number,
+    @Body() dto: UpdateOrderDto,
+  ): Promise<{}> {
+    return await this.cartService.updateOrder(productId, dto);
   }
 
   @Delete(':id')
