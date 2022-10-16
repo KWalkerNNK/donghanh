@@ -5,7 +5,9 @@ import {
   SECRET_HOST,
   SECRET_PASS,
   SECRET_USER_KEY,
-} from 'src/constant/const.secret';
+} from '../constant/const.secret';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../database/entity/entity.user';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import {
       },
     }),
     CacheModule.register(),
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [RecoverController],
   providers: [],

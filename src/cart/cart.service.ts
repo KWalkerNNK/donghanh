@@ -17,21 +17,26 @@ export class CartService {
       .query(`select cart.id, product.name, product.files, product.description, product.price,
       cart.product_quantity, product.discount, user.full_name, user.address, user.phone_number, user.email
     from cart
-    inner join user on cart.user_id = ${userId}
-    inner join product on cart.product_id = product.id`);
+    inner join user on cart.user_id = user.id
+    inner join product on cart.product_id = product.id
+    where cart.user_id = ${userId}`);
     return cart;
   }
 
   async addOrder(userId: number, dto: CartDto): Promise<{}> {
-    const orderExists = await this.cartRepo.findBy({ userId });
-    if (orderExists.length != 0 && orderExists[0].productId == dto.productId) {
-      return await this.cartRepo.update(orderExists[0].id, dto);
+    const orderExists = await this.cartRepo.findOne({
+      where: { userId: userId },
+    });
+    if (orderExists && orderExists.productId == dto.productId) {
+      return await this.cartRepo.update(orderExists.id, dto);
     }
+    // Mai fix
+    // console.log(orderExists.productId, dto.productId, orderExists && orderExists.productId == dto.productId)
     return await this.cartRepo.save({ userId, ...dto });
   }
 
   async updateOrder(
-    @Param('id', ParseIntPipe) productId: number,
+    @Param(':id', ParseIntPipe) productId: number,
     dto: UpdateOrderDto,
   ): Promise<{}> {
     return await this.cartRepo.update(productId, dto);

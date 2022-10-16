@@ -4,6 +4,9 @@ export const MESSAGE = {
   WRONG_PASSWORD: 'Sai mật khẩu rồi bạn!',
   WRONG_EMAIL: 'Sai email rồi bạn!',
 
+  CHECK_EMAIL: 'Vui lòng kiểm tra Email',
+  EMAIL_NOT_FOUND:
+    'Chúng tôi chưa từng thấy Email nào như vậy! Vui lòng đăng kí tài khoản!',
   WRONG_VERIFICATION_CODE: 'Mã xác thực sai, vui lòng thử lại!',
   VERIFICATION_CODE_IS_CORRECT: 'Xác thực người dùng thành công!',
 
