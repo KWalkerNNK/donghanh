@@ -1,3 +1,4 @@
+import { MailModule } from './mail/mail.module';
 import { CartModule } from './cart/cart.module';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
@@ -13,6 +14,7 @@ import { ProductModule } from './products/product.module';
     UserModule,
     ProductModule,
     CartModule,
+    MailModule,
     AdminModule,
 
     //Connect to SQL

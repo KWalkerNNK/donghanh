@@ -20,6 +20,11 @@ Method: POST
 -> email: example@gmail.com
 -> password: Your password
 
+💦 http://localhost:1410/mailer?toemail=email
+Method: GET - If you forgot your password, we'll send a code to your Email to make sure it's you
+@Query
+-> email: example@gmail.com
+
 💦 http://localhost:1410/profile
 Method: GET
 @Headers
