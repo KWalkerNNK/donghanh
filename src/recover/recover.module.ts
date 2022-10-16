@@ -1,4 +1,4 @@
-import { MailController } from './mail.controller';
+import { RecoverController } from './recover.controller';
 import { CacheModule, Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
 import {
@@ -22,7 +22,7 @@ import {
     }),
     CacheModule.register(),
   ],
-  controllers: [MailController],
+  controllers: [RecoverController],
   providers: [],
 })
-export class MailModule {}
+export class RecoverModule {}

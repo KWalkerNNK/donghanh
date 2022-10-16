@@ -20,10 +20,15 @@ Method: POST
 -> email: example@gmail.com
 -> password: Your password
 
-💦 http://localhost:1410/mailer?toemail=email
-Method: GET - If you forgot your password, we'll send a code to your Email to make sure it's you
+💦 http://localhost:1410/recover?toemail=email
+Method: GET - If you forgot your password, we will send a code to your Email to make sure it is you
 @Query
--> email: example@gmail.com
+-> toemail: example@gmail.com
+
+💦 http://localhost:1410/recover
+Method: POST - Enter the verification code we send you
+@POST
+-> verificationCode: Your verification code
 
 💦 http://localhost:1410/profile
 Method: GET
@@ -61,6 +66,7 @@ Method: GET - Check out your own shopping cart
 
 💦 http://localhost:1410/cart
 Method: POST - Add your order
+@Body
 -> productId: ...
 -> productQuantity: ...
 
@@ -69,6 +75,7 @@ Method: POST - Add your order
 
 💦 http://localhost:1410/cart
 Method: PATCH - Update your order
+@Body
 -> productId: ...
 -> productQuantity: ...
 
@@ -77,6 +84,7 @@ Method: PATCH - Update your order
 
 💦 http://localhost:1410/cart/:id
 Method: DELETE - Delete your order
+@Params
 
 @Headers
 -> Authorization: Bearer access_token
@@ -119,6 +127,7 @@ Method: PATCH - Edit any product
 
 💦 http://localhost:1410/product/:id
 Method: DELETE - Delete any product
+@Params
 
 @Headers
 -> Authorization: Bearer access_token
