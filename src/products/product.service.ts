@@ -1,6 +1,6 @@
 import { Product } from './../database/entity/entity.product';
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/dto.create-product';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EditProductDto } from './dto/dto.edit-product';
@@ -19,6 +19,12 @@ export class ProductService {
 
   async getProductById(id: number) {
     return await this.productRepo.findOneBy({ id });
+  }
+
+  async getProductByName(productName: string) {
+    return await this.productRepo.query(
+      `select * from product where name like "%${productName}%"`,
+    );
   }
 
   async createProduct(dto: CreateProductDto) {

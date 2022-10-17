@@ -56,7 +56,11 @@ Method: PATCH
 Method: GET - Get all information of all products
 
 💦 http://localhost:1410/product/:id
-Method: GET - Get product information of any product
+Method: GET - Get product information of any product by Id
+
+💦http://localhost:1410/product/query?name=productName
+Method: GET - Get product information of any product by name
+@Query
 
 💦 http://localhost:1410/cart
 Method: GET - Check out your own shopping cart

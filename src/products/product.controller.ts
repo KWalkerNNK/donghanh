@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -26,6 +27,11 @@ import { JwtGuard } from './../auth/guard/guard.jwt';
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+
+  @Get('query')
+  async getProductByName(@Query('name') productName: string) {
+    return await this.productService.getProductByName(productName);
+  }
 
   @Get()
   async getProducts() {
