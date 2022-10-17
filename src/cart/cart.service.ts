@@ -25,13 +25,11 @@ export class CartService {
 
   async addOrder(userId: number, dto: CartDto): Promise<{}> {
     const orderExists = await this.cartRepo.findOne({
-      where: { userId: userId },
+      where: { userId: userId, productId: dto.productId },
     });
-    if (orderExists && orderExists.productId == dto.productId) {
+    if (orderExists) {
       return await this.cartRepo.update(orderExists.id, dto);
     }
-    // Mai fix
-    // console.log(orderExists.productId, dto.productId, orderExists && orderExists.productId == dto.productId)
     return await this.cartRepo.save({ userId, ...dto });
   }
 
