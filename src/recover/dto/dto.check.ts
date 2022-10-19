@@ -1,9 +1,8 @@
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CheckDto {
-  @Type(() => Number)
-  @IsNumber()
+  @IsInt()
   @IsNotEmpty()
   verificationCode: number;
 }

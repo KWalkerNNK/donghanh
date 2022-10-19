@@ -18,7 +18,7 @@ export class Product {
   @Column({ name: 'files', nullable: false })
   productFiles: string;
 
-  @Column({ name: 'description', nullable: false })
+  @Column({ name: 'description', default: '' })
   productDescription: string;
 
   @Column({ name: 'price', nullable: false })
@@ -27,7 +27,7 @@ export class Product {
   @Column({ name: 'quantity', nullable: false })
   productQuantity: number;
 
-  @Column({ name: 'discount', nullable: false })
+  @Column({ name: 'discount', default: 0 })
   productDiscount: number;
 
   @Column({ name: 'type', nullable: false })

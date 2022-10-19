@@ -99,6 +99,12 @@ Method: DELETE - Delete your cart
 @Headers
 -> Authorization: Bearer access_token
 
+💦http://localhost:1410/cart/purchase?id=id
+Method: GET - Buy product
+@Params
+
+@Headers
+-> Authorization: Bearer access_token
 ```
 ## For the owner
 
@@ -138,6 +144,39 @@ Method: DELETE - Delete any product
 
 💦 http://localhost:1410/product
 Method: DELETE - Delete all products
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦http://localhost:1410/statistic
+Method: GET - Order statistics
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦http://localhost:1410/statistic/:id
+Method: PATCH - Update order status
+@Body
+-> status?: Done...
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦http://localhost:1410/statistic/cart?id=id
+Method: GET - Search for orders by Id
+@Params
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦http://localhost:1410/statistic/delete-all
+Method: DELETE - Clean up stats
+
+@Headers
+-> Authorization: Bearer access_token
+
+💦http://localhost:1410/statistic/:id
+Method: DELETE - Delete orders with Id =:id from the system
 
 @Headers
 -> Authorization: Bearer access_token

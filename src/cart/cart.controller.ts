@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CartDto } from './dto/dto.cart';
@@ -19,6 +20,14 @@ import { GetUser } from '../auth/decorators/decorator.get-user';
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
+
+  @Get('purchase')
+  async purchase(
+    @GetUser('id') userId: number,
+    @Query('id') cartId,
+  ): Promise<{}> {
+    return await this.cartService.purchase(userId, cartId);
+  }
 
   @Get()
   async getCart(@GetUser('id') userId: number) {

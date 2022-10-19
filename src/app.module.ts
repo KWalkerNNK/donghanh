@@ -1,21 +1,21 @@
 import { RecoverModule } from './recover/recover.module';
 import { CartModule } from './cart/cart.module';
-import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './database/dtb.index';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './products/product.module';
+import { StatisticModule } from './statistic/statistic.module';
 
 @Module({
   imports: [
     AuthModule,
+    RecoverModule,
     UserModule,
     ProductModule,
     CartModule,
-    RecoverModule,
-    AdminModule,
+    StatisticModule,
 
     //Connect to SQL
     TypeOrmModule.forRoot({

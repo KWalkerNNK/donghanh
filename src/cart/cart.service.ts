@@ -1,3 +1,4 @@
+import { Statistic } from '../database/entity/entity.statistic';
 import { UpdateOrderDto } from './dto/dto.update-order';
 import { CartDto } from './dto/dto.cart';
 import { Injectable, Param, ParseIntPipe } from '@nestjs/common';
@@ -10,6 +11,8 @@ export class CartService {
   constructor(
     @InjectRepository(Cart)
     private readonly cartRepo: Repository<Cart>,
+    @InjectRepository(Statistic)
+    private readonly statisticRepo: Repository<Statistic>,
   ) {}
 
   async getCart(userId: number): Promise<{}> {
@@ -19,7 +22,7 @@ export class CartService {
     from cart
     inner join user on cart.user_id = user.id
     inner join product on cart.product_id = product.id
-    where cart.user_id = ${userId}`);
+    where cart.user_id = ${userId} & (cart.deleted_at is null)`);
     return cart;
   }
 
@@ -46,5 +49,18 @@ export class CartService {
 
   async deleteCart(userId: number): Promise<{}> {
     return await this.cartRepo.delete({ userId });
+  }
+
+  async purchase(userId: number, cartId: number): Promise<{}> {
+    const orderExists = await this.cartRepo.find({
+      where: { userId: userId, id: cartId },
+      withDeleted: false,
+    });
+    if (orderExists.length > 0) {
+      await this.statisticRepo.save({ cartId });
+      return await this.cartRepo.softDelete({ userId: userId, id: cartId });
+    } else {
+      return 'Không được spam!';
+    }
   }
 }
