@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { CheckDto } from './dto/dto.check';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Body, Controller, Get, Injectable, Post, Query } from '@nestjs/common';
@@ -15,6 +16,7 @@ export class RecoverController {
     private readonly mailService: MailerService,
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
+    private readonly authService: AuthService,
   ) {}
   @Get()
   async sendMail(@Query('toemail') toEmail): Promise<string> {
@@ -25,6 +27,10 @@ export class RecoverController {
       const code = await this.verificationCode();
 
       await RecoverController.memoryCache.set('code', code);
+
+      await RecoverController.memoryCache.set('userId', accountExists.id);
+      await RecoverController.memoryCache.set('email', accountExists.email);
+      await RecoverController.memoryCache.set('role', accountExists.isRole);
 
       await this.mailService.sendMail({
         to: toEmail,
@@ -427,10 +433,16 @@ export class RecoverController {
   }
 
   @Post()
-  async checkVerificationCode(@Body() dto: CheckDto): Promise<string> {
+  async checkVerificationCode(@Body() dto: CheckDto): Promise<{}> {
     const code: number = await RecoverController.memoryCache.get('code');
     if (code === dto.verificationCode) {
-      return MESSAGE.VERIFICATION_CODE_IS_CORRECT;
+      const userId: number = await RecoverController.memoryCache.get('userId');
+      const email: string = await RecoverController.memoryCache.get('email');
+      const role: string = await RecoverController.memoryCache.get('role');
+
+      const token = await this.authService.signToken(userId, email, role);
+      const correct = await MESSAGE.VERIFICATION_CODE_IS_CORRECT;
+      return { correct, token };
     }
     return MESSAGE.WRONG_VERIFICATION_CODE;
   }

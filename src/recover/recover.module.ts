@@ -1,3 +1,4 @@
+import { AuthService } from '../auth/auth.service';
 import { RecoverController } from './recover.controller';
 import { CacheModule, Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
@@ -8,6 +9,7 @@ import {
 } from '../constant/const.secret';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../database/entity/entity.user';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -24,8 +26,9 @@ import { User } from '../database/entity/entity.user';
     }),
     CacheModule.register(),
     TypeOrmModule.forFeature([User]),
+    JwtModule.register({}),
   ],
   controllers: [RecoverController],
-  providers: [],
+  providers: [AuthService],
 })
 export class RecoverModule {}
